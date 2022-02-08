@@ -66,7 +66,7 @@ def Screen(word_as_letters, guessed_right):
 # left. If not print a loosing message and exit the app.
 # If neither of the 2 conditions mentioned above go back to STEP 4
 
-
+import random
 import hangman_ASCII_art
 from hangman_ASCII_art import *
 
@@ -92,14 +92,17 @@ def difficulty_level():
     
      return lives#, image
 
-def get_random_countries(input, lives):
+def get_random_countries():
   lines = []
-  txt = open("countries-and-capitals.txt", "rt")
-  #lines = txt.readlines()
-  #countries = [ txt.split("|")[0].strip()]
-    
+  f = open("countries-and-capitals.txt")
+  lines = f.readlines()
+  countries = []
+  for country in lines:
+    countries.append(country.split('|')[0].strip())
+  print(random.choice(countries))
 #MAIN-----------------------------------------------------------------------------------------------------------------------------------------
 #lives = difficulty_level() #set difficulty
+get_random_countries()
 
 word_as_letters = []
 for i in range(0, len(word_to_guess)):
