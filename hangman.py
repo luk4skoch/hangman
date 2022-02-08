@@ -116,9 +116,11 @@ while valid_guess == False:
         print(f"You've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
       else:
         already_tried_letters.append(guess)
-        print(find(guess, word_as_letters)) # shows if input is in the word.
+        if find(guess, word_as_letters) == True: # shows if input is in the word.
+          print("hurray")
+        else:
+          print("booooo")
 
-        
         #next steps will be to append the number of the corrct letter(s) to guessed_right
         #there will be something like "word[] or screen[]"
         #good night
