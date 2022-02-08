@@ -67,13 +67,13 @@ def difficulty_level():
      difficulty = input("Please choose your difficulty:")
      if difficulty == "1":
        lives = 7
-       #image = diff_1
+       image = diff_1
      elif difficulty == "2":
        lives = 5
-       #image = diff_2
+       image = diff_2
      elif difficulty == "3":
        lives = 3
-       #image = diff_3
+       image = diff_3
      else:
        print("Please choose difficulty 1, 2 or 3")
        continue
