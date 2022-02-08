@@ -38,10 +38,9 @@ def find(letter, list): # sucht letter in liste, gibt boolian
 # if the letter is present in the word iterate through all the letters in the variable
 # word_to_guess. If that letter is present in the already_tried_letters then display it,
 # otherwise display "_".
-guessed_right = []
-def Screen(word_as_letters, guessed_right):
+guessed_right = [] # contains correct guesses
+def Screen(word_as_letters, guessed_right): # displays sectret word as "_ " and correct guessed letters.
   word = []
-
   for i in range(0, len(word_as_letters)):
     if word_as_letters[i] in guessed_right:
       word.append(word_as_letters[i])
@@ -118,27 +117,29 @@ for i in range(0, len(word_as_letters)):
   guessed_right.append(" ")
 
 while valid_guess == False: 
-    guess = input("Guess a letter\n(Type \"QUIT\" to quit the Game.").upper() # get input as upper (guess)
-    if len(guess) > 1:
-        if guess== "QUIT":
-            print("bye")
-            valid_guess = True
-        else:
-            print("Please just one letter!") #below has just one letter
+  print(f"Lives: {lives}") 
+  guess = input("Guess a letter\n(Type \"QUIT\" to quit the Game.").upper() # get input as upper (guess)
+  if len(guess) > 1:
+    if guess== "QUIT":
+      print("bye")
+      valid_guess = True
     else:
+      print("Please just one letter!") #below has just one letter
+  else:
       
-      if find(guess, already_tried_letters) == True:
-        print(find(guess, already_tried_letters)) 
-        print(f"\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
+    if find(guess, already_tried_letters) == True:
+      print(find(guess, already_tried_letters)) 
+      print(f"\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
+    else:
+      already_tried_letters.append(guess)
+      if find(guess, word_as_letters) == True: # shows if input is in the word.
+        print("\nhurray")
+        guessed_right.append(guess) #adds guess to guessed_right
+        Screen(word_as_letters, guessed_right)
       else:
-        already_tried_letters.append(guess)
-        if find(guess, word_as_letters) == True: # shows if input is in the word.
-          print("hurray")
-          guessed_right.append(guess) #adds guess to guessed_right
-          Screen(word_as_letters, guessed_right)
-        else:
-          print("booooo")
-          Screen(word_as_letters, guessed_right)
+        print("\nbooooo")
+        lives = lives - 1
+        Screen(word_as_letters, guessed_right)
 
         #next steps will be to append the number of the corrct letter(s) to guessed_right
         #there will be something like "word[] or screen[]"
