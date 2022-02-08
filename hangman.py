@@ -109,11 +109,16 @@ while valid_guess == False:
             valid_guess = True
         else:
             print("Please just one letter!") #below has just one letter
-    elif find(guess, already_tried_letters) == True: #----------------------------here is a bug----doesn't append and print
-        already_tried_letters.append(guess)
-        print(f"You've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
     else:
+      
+      if find(guess, already_tried_letters) == True:
+        print(find(guess, already_tried_letters)) 
+        print(f"You've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
+      else:
+        already_tried_letters.append(guess)
         print(find(guess, word_as_letters)) # shows if input is in the word.
+
+        
         #next steps will be to append the number of the corrct letter(s) to guessed_right
         #there will be something like "word[] or screen[]"
         #good night
