@@ -99,6 +99,7 @@ def get_random_countries():
   countries = []
   for country in lines:
     countries.append(country.split('|')[0].strip())
+    return random.choice(countries)
   print(random.choice(countries))
 #MAIN-----------------------------------------------------------------------------------------------------------------------------------------
 #lives = difficulty_level() #set difficulty
