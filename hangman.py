@@ -1,14 +1,14 @@
 # PART 1 yes
 # display a menu with at least 3 difficulty choices and ask the user
 # to select the desired level
-#difficulty = "1" # sample data, normally the user should choose the difficulty
+difficulty = "1" # sample data, normally the user should choose the difficulty
 
 
 # STEP 2
 # based on the chosen difficulty level, set the values 
 # for the player's lives
-#word_to_guess = "Cairo" # sample data, normally the word should be chosen from the countries-and-capitals.txt
-#lives = 5 # sample data, normally the lives should be chosen based on the difficulty
+word_to_guess = "Cairo" # sample data, normally the word should be chosen from the countries-and-capitals.txt
+lives = 5 # sample data, normally the lives should be chosen based on the difficulty
 
 
 # STEP 3
@@ -28,7 +28,7 @@
 # HINT: search on the internet: `python if letter in list`
 # If it is not, than append to the tried letters
 # If it has already been typed, return to STEP 5. HINT: use a while loop here
-#already_tried_letters = [] # this list will contain all the tried letters
+already_tried_letters = [] # this list will contain all the tried letters
 
 def find(letter, list): # sucht letter in liste, gibt boolian
     return any(letter in word for word in list)
@@ -38,17 +38,18 @@ def find(letter, list): # sucht letter in liste, gibt boolian
 # if the letter is present in the word iterate through all the letters in the variable
 # word_to_guess. If that letter is present in the already_tried_letters then display it,
 # otherwise display "_".
-guessed_right = []
-def Screen(word_as_letters, guessed_right):
+guessed_right = [] # contains correct guesses
+def Screen(word_as_letters, guessed_right, image, lives): # displays sectret word as "_ " and correct guessed letters.
   word = []
-
   for i in range(0, len(word_as_letters)):
     if word_as_letters[i] in guessed_right:
       word.append(word_as_letters[i])
       word.append(" ")
     else:
       word.append("_ ")
+  print(image[-lives])
   print(''.join(str(i) for i in word), sep = "...")
+  
   
 
 
@@ -90,22 +91,25 @@ def difficulty_level():
        print("Please choose difficulty 1, 2 or 3")
        continue
     
-     return lives#, image
+     return lives, image
 
+#with open("countries-and-capitals") as f:
+   # lines = f.readlines()
+#f = open("countries-and-capitals.txt", "rt")
 def get_random_countries():
   lines = []
   f = open("countries-and-capitals.txt")
   lines = f.readlines()
+  lines
   countries = []
   for country in lines:
     countries.append(country.split('|')[0].strip())
-    random.choice(countries)
-    return
-
-  print(random.choice(countries))
+  return random.choice(countries)
+  #print(random.choice(countries))
 #MAIN-----------------------------------------------------------------------------------------------------------------------------------------
-#lives = difficulty_level() #set difficulty
-get_random_countries()
+image = []
+lives, image = difficulty_level() #set difficulty
+word_to_guess = get_random_countries()
 
 word_as_letters = []
 for i in range(0, len(word_to_guess)):
@@ -124,31 +128,34 @@ for i in range(0, len(word_as_letters)):
   guessed_right.append(" ")
 
 while valid_guess == False: 
-    guess = input("Guess a letter\n(Type \"QUIT\" to quit the Game.").upper() # get input as upper (guess)
-    if len(guess) > 1:
-        if guess== "QUIT":
-            print("bye")
-            valid_guess = True
-        else:
-            print("Please just one letter!") #below has just one letter
+  Screen(word_as_letters, guessed_right, image, lives)
+  print(f"Lives: {lives}") 
+  guess = input("Guess a letter\n(Type \"QUIT\" to quit the Game)").upper() # get input as upper (guess)
+  if len(guess) > 1:
+    if guess== "QUIT":
+      print("bye")
+      valid_guess = True
     else:
+      print("Please just one letter!") #below has just one letter
+  else:
       
-      if find(guess, already_tried_letters) == True:
-        print(find(guess, already_tried_letters)) 
-        print(f"\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
+    if find(guess, already_tried_letters) == True:
+      print(find(guess, already_tried_letters)) 
+      print(f"---------------\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
+    else:
+      already_tried_letters.append(guess)
+      if find(guess, word_as_letters) == True: # shows if input is in the word.
+        print("---------------\nhurray")
+        guessed_right.append(guess) #adds guess to guessed_right
+        #Screen(word_as_letters, guessed_right, image, lives)
       else:
-        already_tried_letters.append(guess)
-        if find(guess, word_as_letters) == True: # shows if input is in the word.
-          print("hurray")
-          guessed_right.append(guess) #adds guess to guessed_right
-          Screen(word_as_letters, guessed_right)
-        else:
-          print("booooo")
-          Screen(word_as_letters, guessed_right)
+        print("---------------\nbooooo")
+        lives = lives - 1
+        #Screen(word_as_letters, guessed_right, image, lives)
 
-        #next steps will be to append the number of the corrct letter(s) to guessed_right
-        #there will be something like "word[] or screen[]"
-        #good night
+# now we just have to define win and lose
+#then we can clean up
+#maybe add some features
 
 
     
