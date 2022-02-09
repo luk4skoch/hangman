@@ -73,6 +73,7 @@ from hangman_ASCII_art import *
 
 def difficulty_level():
   image = []
+  image.clear()
   lives = 0
   while True:
      print("-DIFFICULTY-")
@@ -106,54 +107,81 @@ def get_random_countries():
     countries.append(country.split('|')[0].strip())
   return random.choice(countries)
   #print(random.choice(countries))
-#MAIN-----------------------------------------------------------------------------------------------------------------------------------------
-image = []
-lives, image = difficulty_level() #set difficulty
-word_to_guess = get_random_countries()
-word_as_letters = []
-for i in range(0, len(word_to_guess)):
-    word_as_letters.append(word_to_guess[i].upper())
-    #word_as_letters.append(" ")
-#print(word_as_letters)
-#print(word_as_letters[3])
 
-#print(''.join(str(i) for i in word_as_letters), sep = "...")
-
-#print("_ " * len(word_to_guess)) #quasi step 3
-
-valid_guess = False
-
-for i in range(0, len(word_as_letters)):
-  guessed_right.append(" ")
-
-while valid_guess == False: 
-  Screen(word_as_letters, guessed_right, image, lives)
-  print(f"Lives: {lives}") 
-  guess = input("Guess a letter\n(Type \"QUIT\" to quit the Game)").upper() # get input as upper (guess)
-  if len(guess) > 1:
-    if guess== "QUIT":
+def new_game(runtime):
+  loop = True
+  while loop == True:
+    yn = input("Do you want to play again?(y/n)")
+    if yn == "y":
+      print("-NEW GAME-")
+      loop = False
+    elif yn == "n":
       print("bye")
-      valid_guess = True
+      runtime = False
+      loop = False
     else:
-      print("Please just one letter!") #below has just one letter
-  else:
-    if find(guess, already_tried_letters) == True:
-      print(f"---------------\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
-    else:
-      already_tried_letters.append(guess)
-      if find(guess, word_as_letters) == True: # shows if input is in the word.
-        print("---------------\nhurray")
-        guessed_right.append(guess) #adds guess to guessed_right
-        if word_to_guess in guessed_right:
-          print("!!!YOU WON!!!")
-          valid_guess = True
+      print("please write y or n!")
+  return runtime
+  
+#MAIN-----------------------------------------------------------------------------------------------------------------------------------------
+runtime = True
+word_as_letters = []
+while runtime == True:
+  win_count = 0
+  word_as_letters.clear()
+  guessed_right.clear()
+  already_tried_letters.clear()
+
+  lives, image = difficulty_level() #set difficulty
+  word_to_guess = get_random_countries()
+  for i in range(0, len(word_to_guess)):
+      word_as_letters.append(word_to_guess[i].upper())
+      #word_as_letters.append(" ")
+  #print(word_as_letters)
+  #print(word_as_letters[3])
+
+  #print(''.join(str(i) for i in word_as_letters), sep = "...")
+
+  #print("_ " * len(word_to_guess)) #quasi step 3
+
+  valid_guess = False
+
+  #for i in range(0, len(word_as_letters)):
+    #guessed_right.append(" ")
+
+  while valid_guess == False: 
+    Screen(word_as_letters, guessed_right, image, lives)
+    print(f"Lives: {lives}") 
+    print(word_to_guess)
+    guess = input("Guess a letter\n(Type \"QUIT\" to quit the Game)").upper() # get input as upper (guess)
+    if len(guess) > 1:
+      if guess== "QUIT":
+        print("bye")
+        valid_guess = True
+        runtime = False
       else:
-        print("---------------\nbooooo")
-        lives = lives - 1
-        if lives == 0:
-          Screen(word_as_letters, guessed_right, image, lives)
-          print(f"-GAME OVER-\nThe correct word is {word_to_guess}.")
-          valid_guess = True
+        print("Please just one letter!") #below has just one letter
+    else:
+      if find(guess, already_tried_letters) == True:
+        print(f"---------------\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
+      else:
+        already_tried_letters.append(guess)
+        if find(guess, word_as_letters) == True: # shows if input is in the word.
+          print("---------------\nhurray")
+          guessed_right.append(guess) #adds guess to guessed_right
+          win_count = win_count + 1 * word_as_letters.count(guess) #counts correct letters
+          if len(word_as_letters) == win_count:
+            print("!!!YOU WON!!!")
+            valid_guess = True
+            runtime = new_game(runtime)
+        else:
+          print("---------------\nbooooo")
+          lives = lives - 1
+          if lives == 0:
+            Screen(word_as_letters, guessed_right, image, lives)
+            print(f"-GAME OVER-\nThe correct word is {word_to_guess}.")
+            valid_guess = True
+            runtime = new_game(runtime)
 
 # now we just have to define win and lose
 #then we can clean up
