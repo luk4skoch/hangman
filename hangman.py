@@ -136,7 +136,7 @@ while runtime == True:
   word_to_guess = get_random_countries()
   for i in range(0, len(word_to_guess)):
       word_as_letters.append(word_to_guess[i].upper())
-      #word_as_letters.append(" ")
+      word_as_letters.strip()
   #print(word_as_letters)
   #print(word_as_letters[3])
 
