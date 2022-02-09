@@ -106,6 +106,7 @@ while runtime == True:
   word_to_guess = get_random_countries()
   for i in range(0, len(word_to_guess)):
       word_as_letters.append(word_to_guess[i].upper())
+<<<<<<< HEAD
 
   if " " in word_as_letters:
     guessed_right.append(" ")
@@ -114,6 +115,9 @@ while runtime == True:
 
 
       #word_as_letters.append(" ")
+=======
+      word_as_letters.strip()
+>>>>>>> 7edbf3aab2f4178d9c66f0a97cf1181b9e5e2cff
   #print(word_as_letters)
   #print(word_as_letters[3])
 
