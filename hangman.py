@@ -17,7 +17,7 @@ lives = 5 # sample data, normally the lives should be chosen based on the diffic
 
 
 # STEP 4
-# ask the user to type a letter
+# ask the user to type a lettersartszdt
 # here you should validate if the typed letter is the word 
 # "quit", "Quit", "QUit", "QUIt", "QUIT", "QuIT"... you get the idea :)
 # HINT: use the upper() or lower() built-in Python functions
