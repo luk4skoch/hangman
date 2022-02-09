@@ -94,19 +94,27 @@ def difficulty_level():
     
      return lives, image
 
-#with open("countries-and-capitals") as f:
-   # lines = f.readlines()
-#f = open("countries-and-capitals.txt", "rt")
 def get_random_countries():
   lines = []
   f = open("countries-and-capitals.txt")
   lines = f.readlines()
-  lines
+  chocaco = input("Make your choice: ")
   countries = []
-  for country in lines:
-    countries.append(country.split('|')[0].strip())
-  return random.choice(countries)
+  capitals = []
+  if chocaco == "co":
+    for country in lines:
+      countries.append(country.split('|')[0].strip())
+    return random.choice(countries)
+  elif chocaco == "ca":
+    for capital in lines:  
+      capitals.append(capital.split('|')[-1].strip())
+    return random.choice(capitals)
+  else:
+    print ("You have to choose between \"co\" and \"ca\" ")
+  #return random.choice(countries) 
   #print(random.choice(countries))
+#def get_random_capitals():
+
 
 def new_game(runtime):
   loop = True
@@ -131,13 +139,12 @@ while runtime == True:
   word_as_letters.clear()
   guessed_right.clear()
   already_tried_letters.clear()
-  guessed_right.append(" ")
 
   lives, image = difficulty_level() #set difficulty
   word_to_guess = get_random_countries()
   for i in range(0, len(word_to_guess)):
       word_as_letters.append(word_to_guess[i].upper())
-      word_as_letters.strip()
+      #word_as_letters.strip()
   #print(word_as_letters)
   #print(word_as_letters[3])
 
@@ -172,7 +179,6 @@ while runtime == True:
           guessed_right.append(guess) #adds guess to guessed_right
           win_count = win_count + 1 * word_as_letters.count(guess) #counts correct letters
           if len(word_as_letters) == win_count:
-            Screen(word_as_letters, guessed_right, image, lives)
             print("!!!YOU WON!!!")
             valid_guess = True
             runtime = new_game(runtime)
@@ -188,6 +194,3 @@ while runtime == True:
 # now we just have to define win and lose
 #then we can clean up
 #maybe add some features
-
-
-    
