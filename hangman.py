@@ -18,7 +18,7 @@ def Screen(word_as_letters, guessed_right, image, lives): # displays sectret wor
   print(image[-lives -1])
   print(word.capitalize())
   
-  
+
 
 
 # if the letter is not present in the word decrease the value in the lives variable
@@ -113,7 +113,7 @@ while runtime == True:
   word_to_guess = get_random_countries()
   for i in range(0, len(word_to_guess)):
 
-      word_as_letters.append(word_to_guess[i])
+      #word_as_letters.append(word_to_guess[i])
 
       word_as_letters.append(word_to_guess[i].upper())
 
@@ -166,7 +166,7 @@ while runtime == True:
           print("---------------\nhurray")
 
           guessed_right.append(guess) #adds guess to guessed_right
-          guessed_right.append(guess.upper())
+          #guessed_right.append(guess.upper())
 
           win_count = win_count + 1 * word_as_letters.count(guess) #counts correct letters
           if len(word_as_letters) == win_count:
