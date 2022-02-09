@@ -131,6 +131,7 @@ while runtime == True:
   word_as_letters.clear()
   guessed_right.clear()
   already_tried_letters.clear()
+  guessed_right.append(" ")
 
   lives, image = difficulty_level() #set difficulty
   word_to_guess = get_random_countries()
@@ -171,6 +172,7 @@ while runtime == True:
           guessed_right.append(guess) #adds guess to guessed_right
           win_count = win_count + 1 * word_as_letters.count(guess) #counts correct letters
           if len(word_as_letters) == win_count:
+            Screen(word_as_letters, guessed_right, image, lives)
             print("!!!YOU WON!!!")
             valid_guess = True
             runtime = new_game(runtime)
