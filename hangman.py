@@ -1,34 +1,3 @@
-# PART 1 yes
-# display a menu with at least 3 difficulty choices and ask the user
-# to select the desired level
-difficulty = "1" # sample data, normally the user should choose the difficulty
-
-
-# STEP 2
-# based on the chosen difficulty level, set the values 
-# for the player's lives
-word_to_guess = "Cairo" # sample data, normally the word should be chosen from the countries-and-capitals.txt
-lives = 5 # sample data, normally the lives should be chosen based on the difficulty
-
-
-# STEP 3
-# display the chosen word to guess with all letters replaced by "_"
-# for example instead of "Cairo" display "_ _ _ _ _"
-
-
-# STEP 4
-# ask the user to type a lettersartszdt
-# here you should validate if the typed letter is the word 
-# "quit", "Quit", "QUit", "QUIt", "QUIT", "QuIT"... you get the idea :)
-# HINT: use the upper() or lower() built-in Python functions
-
-
-# STEP 5
-# validate if the typed letter is already in the tried letters
-# HINT: search on the internet: `python if letter in list`
-# If it is not, than append to the tried letters
-# If it has already been typed, return to STEP 5. HINT: use a while loop here
-already_tried_letters = [] # this list will contain all the tried letters
 
 def find(letter, list): # sucht letter in liste, gibt boolian
     return any(letter in word for word in list)
@@ -125,18 +94,25 @@ def new_game(runtime):
   
 #MAIN-----------------------------------------------------------------------------------------------------------------------------------------
 runtime = True
+already_tried_letters = []
 word_as_letters = []
 while runtime == True:
   win_count = 0
   word_as_letters.clear()
   guessed_right.clear()
   already_tried_letters.clear()
-  guessed_right.append(" ")
 
   lives, image = difficulty_level() #set difficulty
   word_to_guess = get_random_countries()
   for i in range(0, len(word_to_guess)):
       word_as_letters.append(word_to_guess[i].upper())
+
+  if " " in word_as_letters:
+    guessed_right.append(" ")
+    win_count = win_count + 1
+
+
+
       #word_as_letters.append(" ")
   #print(word_as_letters)
   #print(word_as_letters[3])
