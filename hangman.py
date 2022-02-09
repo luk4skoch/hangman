@@ -1,14 +1,14 @@
 # PART 1 yes
 # display a menu with at least 3 difficulty choices and ask the user
 # to select the desired level
-difficulty = "1" # sample data, normally the user should choose the difficulty
+#difficulty = "1" # sample data, normally the user should choose the difficulty
 
 
 # STEP 2
 # based on the chosen difficulty level, set the values 
 # for the player's lives
-word_to_guess = "Cairo" # sample data, normally the word should be chosen from the countries-and-capitals.txt
-lives = 5 # sample data, normally the lives should be chosen based on the difficulty
+#word_to_guess = "Cairo" # sample data, normally the word should be chosen from the countries-and-capitals.txt
+#lives = 5 # sample data, normally the lives should be chosen based on the difficulty
 
 
 # STEP 3
@@ -28,7 +28,7 @@ lives = 5 # sample data, normally the lives should be chosen based on the diffic
 # HINT: search on the internet: `python if letter in list`
 # If it is not, than append to the tried letters
 # If it has already been typed, return to STEP 5. HINT: use a while loop here
-already_tried_letters = [] # this list will contain all the tried letters
+#already_tried_letters = [] # this list will contain all the tried letters
 
 def find(letter, list): # sucht letter in liste, gibt boolian
     return any(letter in word for word in list)
@@ -99,7 +99,9 @@ def get_random_countries():
   countries = []
   for country in lines:
     countries.append(country.split('|')[0].strip())
-    return random.choice(countries)
+    random.choice(countries)
+    return
+
   print(random.choice(countries))
 #MAIN-----------------------------------------------------------------------------------------------------------------------------------------
 #lives = difficulty_level() #set difficulty
