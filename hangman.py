@@ -8,16 +8,23 @@ def find(letter, list): # is letter in list? True/False
 # word_to_guess. If that letter is present in the already_tried_letters then display it,
 # otherwise display "_".
 guessed_right = [] # contains correct guesses
-def Screen(word_as_letters, guessed_right, image, lives): # displays sectret word as "_ " and correct guessed letters.
+def Screen(guessed_right, image, lives, word_to_guess): # displays sectret word as "_ " and correct guessed letters.
   word = ""
-  for i in range(0, len(word_as_letters)):
-    if word_as_letters[i] in guessed_right:
-      word = word + word_as_letters[i] + " "
+  for i in range(0, len(word_to_guess)):
+    if word_to_guess[i].upper() in guessed_right:
+      word = word + word_to_guess[i] + " "
     else:
       word = word + "_ "
+
+
+
+
+
+      
   print(image[-lives -1])
-  print(word.capitalize())
-  
+  print(word)#.capitalize())
+
+
 
 
 
@@ -111,6 +118,7 @@ while runtime == True:
 
   lives, image = difficulty_level() #set difficulty
   word_to_guess = get_random_countries()
+  #word_to_guess = "Aller Anfang ist aber Schwer"
   for i in range(0, len(word_to_guess)):
 
       #word_as_letters.append(word_to_guess[i])
@@ -146,7 +154,7 @@ while runtime == True:
     #guessed_right.append(" ")
 
   while valid_guess == False: 
-    Screen(word_as_letters, guessed_right, image, lives)
+    Screen(guessed_right, image, lives, word_to_guess)
     print(f"Lives: {lives}") 
     print(word_to_guess)
     guess = input("Guess a letter\n(Type \"QUIT\" to quit the Game)").upper() # get input as upper (guess)
@@ -170,6 +178,7 @@ while runtime == True:
 
           win_count = win_count + 1 * word_as_letters.count(guess) #counts correct letters
           if len(word_as_letters) == win_count:
+            Screen(guessed_right, image, lives, word_to_guess)
             print("!!!YOU WON!!!")
             valid_guess = True
             runtime = new_game(runtime)
@@ -177,7 +186,7 @@ while runtime == True:
           print("---------------\nbooooo")
           lives = lives - 1
           if lives == 0:
-            Screen(word_as_letters, guessed_right, image, lives)
+            Screen(guessed_right, image, lives, word_to_guess)
             print(f"-GAME OVER-\nThe correct word is {word_to_guess}.")
             valid_guess = True
             runtime = new_game(runtime)
