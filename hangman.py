@@ -47,7 +47,7 @@ def Screen(word_as_letters, guessed_right, image, lives): # displays sectret wor
       word.append(" ")
     else:
       word.append("_ ")
-  print(image[-lives])
+  print(image[-lives -1])
   print(''.join(str(i) for i in word), sep = "...")
   
   
@@ -110,7 +110,6 @@ def get_random_countries():
 image = []
 lives, image = difficulty_level() #set difficulty
 word_to_guess = get_random_countries()
-
 word_as_letters = []
 for i in range(0, len(word_to_guess)):
     word_as_letters.append(word_to_guess[i].upper())
@@ -138,24 +137,27 @@ while valid_guess == False:
     else:
       print("Please just one letter!") #below has just one letter
   else:
-      
     if find(guess, already_tried_letters) == True:
-      print(find(guess, already_tried_letters)) 
       print(f"---------------\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
     else:
       already_tried_letters.append(guess)
       if find(guess, word_as_letters) == True: # shows if input is in the word.
         print("---------------\nhurray")
         guessed_right.append(guess) #adds guess to guessed_right
-        #Screen(word_as_letters, guessed_right, image, lives)
+        if word_to_guess in guessed_right:
+          print("!!!YOU WON!!!")
+          valid_guess = True
       else:
         print("---------------\nbooooo")
         lives = lives - 1
-        #Screen(word_as_letters, guessed_right, image, lives)
+        if lives == 0:
+          Screen(word_as_letters, guessed_right, image, lives)
+          print(f"-GAME OVER-\nThe correct word is {word_to_guess}.")
+          valid_guess = True
 
-        #next steps will be to append the number of the corrct letter(s) to guessed_right
-        #there will be something like "word[] or screen[]"
-        #good night
+# now we just have to define win and lose
+#then we can clean up
+#maybe add some features
 
 
     
