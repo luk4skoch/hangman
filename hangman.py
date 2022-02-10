@@ -1,9 +1,7 @@
-
+# FUNCTIONS
 def find(letter, list): # is letter in list? True/False
-    return any(letter in word for word in list)
-
-
-
+  return any(letter in word for word in list)
+#-------------------------------
 def Screen(guessed_right, image, lives, word_to_guess): # displays sectret word as "_ " and correct guessed letters.
   word = ""
   for i in range(0, len(word_to_guess)):
@@ -13,13 +11,7 @@ def Screen(guessed_right, image, lives, word_to_guess): # displays sectret word 
       word = word + "_ "
   print(image[-lives -1])
   print(word)#.capitalize())
-
-
-
-import random
-import hangman_ASCII_art
-from hangman_ASCII_art import *
-
+#-----------------------------------
 def difficulty_level():
   image = []
   image.clear()
@@ -41,7 +33,7 @@ def difficulty_level():
        print("Please choose difficulty 1, 2 or 3")
        continue
      return lives, image
-
+#-----------------------------------------------
 def get_random_countries():
   lines = []
   f = open("countries-and-capitals.txt")
@@ -61,8 +53,7 @@ def get_random_countries():
       return random.choice(capitals)
     else:
       print ("You have to choose between \"co\" and \"ca\" ")
-
-
+#----------------------------------------------------------------
 def new_game(runtime):
   loop = True
   while loop == True:
@@ -77,14 +68,15 @@ def new_game(runtime):
     else:
       print("please write y or n!")
   return runtime
-  
 #MAIN-----------------------------------------------------------------------------------------------------------------------------------------
 #Variables:
+import random
+from hangman_ASCII_art import *
 runtime = True
 guessed_right = []
 already_tried_letters = []
 word_as_letters = []
-#gameloop:
+#gameloop:--------------------------------------------
 while runtime == True:
   # clear variables:
   win_count = 0
