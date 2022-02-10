@@ -1,6 +1,7 @@
 # FUNCTIONS
-
-
+def Credits():
+  print("\033[1;33;48m-CODED BY-\nDaniel Kaltner\nLukas Koch\n-BACKGROUNDMUSIC-\nThe Hanging Tree [Lorenzotanyl] [Progressive Psy Remix]")
+#--------------------------------------------------------------
 def find(letter, list): # is letter in list? True/False
   return any(letter in word for word in list)
 #-------------------------------
@@ -65,8 +66,7 @@ def new_game(runtime):
       print("-NEW GAME-")
       loop = False
     elif yn == "n":
-      print("BACKGROUNDMUSIC: The Hanging Tree [Lorenzotanyl] [Progressive Psy Remix]")
-      print("bye")
+      Credits()
       runtime = False
       loop = False
     else:
@@ -108,8 +108,7 @@ while runtime == True:
     guess = input("\033[1;34;48mGuess a letter\n(Type \"QUIT\" to quit the Game)").upper() # get input as upper (guess)
     if len(guess) > 1:
       if guess == "QUIT":
-        print("BACKGROUNDMUSIC: The Hanging Tree [Lorenzotanyl] [Progressive Psy Remix]")
-        print("bye")
+        Credits()
         valid_guess = True
         runtime = False
       elif guess == "GODMODE": # enables godmode/ cheatmode
