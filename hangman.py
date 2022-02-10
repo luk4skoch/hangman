@@ -1,4 +1,6 @@
 # FUNCTIONS
+
+
 def find(letter, list): # is letter in list? True/False
   return any(letter in word for word in list)
 #-------------------------------
@@ -63,6 +65,7 @@ def new_game(runtime):
       print("-NEW GAME-")
       loop = False
     elif yn == "n":
+      print("BACKGROUNDMUSIC: The Hanging Tree [Lorenzotanyl] [Progressive Psy Remix]")
       print("bye")
       runtime = False
       loop = False
@@ -74,10 +77,12 @@ def new_game(runtime):
 #Variables:
 import random
 from hangman_ASCII_art import *
+from playsound import playsound
 runtime = True
 guessed_right = []
 already_tried_letters = []
 word_as_letters = []
+playsound("background_music.mp3", False)
 #-----------------------------------------------gameloop:--------------------------------------------
 while runtime == True:
   # clear variables:
