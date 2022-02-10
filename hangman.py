@@ -11,32 +11,10 @@ def Screen(guessed_right, image, lives, word_to_guess): # displays sectret word 
       word = word + word_to_guess[i] + " "
     else:
       word = word + "_ "
-
-
-
-
-
-      
   print(image[-lives -1])
   print(word)#.capitalize())
 
 
-
-
-
-# if the letter is not present in the word decrease the value in the lives variable
-# and display a hangman ASCII art. You can search the Internet for "hangman ASCII art",
-# or draw a new beautiful one on your own.
-
-
-
-# STEP 7
-# check if the variable already_tried_letters already contains all the letters necessary
-# to build the value in the variable word_to_guess. If so display a winning message and exit
-# the app.
-# If you still have letters that are not guessed check if you have a non negative amount of lives
-# left. If not print a loosing message and exit the app.
-# If neither of the 2 conditions mentioned above go back to STEP 4
 
 import random
 import hangman_ASCII_art
@@ -62,7 +40,6 @@ def difficulty_level():
      else:
        print("Please choose difficulty 1, 2 or 3")
        continue
-    
      return lives, image
 
 def get_random_countries():
@@ -84,9 +61,6 @@ def get_random_countries():
       return random.choice(capitals)
     else:
       print ("You have to choose between \"co\" and \"ca\" ")
-  #return random.choice(countries) 
-  #print(random.choice(countries))
-#def get_random_capitals():
 
 
 def new_game(runtime):
@@ -117,41 +91,12 @@ while runtime == True:
 
   lives, image = difficulty_level() #set difficulty
   word_to_guess = get_random_countries()
-  #word_to_guess = "Aller Anfang ist aber Schwer"
   for i in range(0, len(word_to_guess)):
-
-      #word_as_letters.append(word_to_guess[i])
-
       word_as_letters.append(word_to_guess[i].upper())
-
-      #word_as_letters.strip()
-
-
-
-
   if " " in word_as_letters:
     guessed_right.append(" ")
     win_count = win_count + 1
-
-
-
-      #word_as_letters.append(" ")
-
-      #word_as_letters.strip()
-
-
-  #print(word_as_letters)
-  #print(word_as_letters[3])
-
-  #print(''.join(str(i) for i in word_as_letters), sep = "...")
-
-  #print("_ " * len(word_to_guess)) #quasi step 3
-
   valid_guess = False
-
-  #for i in range(0, len(word_as_letters)):
-    #guessed_right.append(" ")
-
   while valid_guess == False: 
     Screen(guessed_right, image, lives, word_to_guess)
     print(f"Lives: {lives}") 
@@ -171,10 +116,7 @@ while runtime == True:
         already_tried_letters.append(guess)
         if find(guess, word_as_letters) == True: # shows if input is in the word.
           print("---------------\nhurray")
-
           guessed_right.append(guess) #adds guess to guessed_right
-          #guessed_right.append(guess.upper())
-
           win_count = win_count + 1 * word_as_letters.count(guess) #counts correct letters
           if len(word_as_letters) == win_count:
             Screen(guessed_right, image, lives, word_to_guess)
@@ -189,7 +131,3 @@ while runtime == True:
             print(f"-GAME OVER-\nThe correct word is {word_to_guess}.")
             valid_guess = True
             runtime = new_game(runtime)
-
-# now we just have to define win and lose
-#then we can clean up
-#maybe add some features
