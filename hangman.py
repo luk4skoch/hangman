@@ -3,11 +3,7 @@ def find(letter, list): # is letter in list? True/False
     return any(letter in word for word in list)
 
 
-# STEP 6
-# if the letter is present in the word iterate through all the letters in the variable
-# word_to_guess. If that letter is present in the already_tried_letters then display it,
-# otherwise display "_".
-guessed_right = [] # contains correct guesses
+
 def Screen(guessed_right, image, lives, word_to_guess): # displays sectret word as "_ " and correct guessed letters.
   word = ""
   for i in range(0, len(word_to_guess)):
@@ -73,19 +69,21 @@ def get_random_countries():
   lines = []
   f = open("countries-and-capitals.txt")
   lines = f.readlines()
-  chocaco = input("Make your choice: ")
-  countries = []
-  capitals = []
-  if chocaco == "co":
-    for country in lines:
-      countries.append(country.split('|')[0].strip())
-    return random.choice(countries)
-  elif chocaco == "ca":
-    for capital in lines:  
-      capitals.append(capital.split('|')[-1].strip())
-    return random.choice(capitals)
-  else:
-    print ("You have to choose between \"co\" and \"ca\" ")
+  valid_input = False
+  while valid_input == False:
+    chocaco = input("Make your choice: ")
+    countries = []
+    capitals = []
+    if chocaco == "co":
+      for country in lines:
+        countries.append(country.split('|')[0].strip())
+      return random.choice(countries)
+    elif chocaco == "ca":
+      for capital in lines:  
+        capitals.append(capital.split('|')[-1].strip())
+      return random.choice(capitals)
+    else:
+      print ("You have to choose between \"co\" and \"ca\" ")
   #return random.choice(countries) 
   #print(random.choice(countries))
 #def get_random_capitals():
@@ -108,6 +106,7 @@ def new_game(runtime):
   
 #MAIN-----------------------------------------------------------------------------------------------------------------------------------------
 runtime = True
+guessed_right = []
 already_tried_letters = []
 word_as_letters = []
 while runtime == True:
