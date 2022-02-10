@@ -11,15 +11,15 @@ def Screen(guessed_right, image, lives, word_to_guess): # displays sectret word 
       word = word + word_to_guess[i] + " "
     else:
       word = word + "_ "
-  print(image[-lives -1])
-  print(word)#.capitalize())
+  print("\033[1;37;48m", image[-lives -1])
+  print(word)
 #-----------------------------------
 def difficulty_level():
   image = []
   image.clear()
   lives = 0
   while True:
-     print("-DIFFICULTY-")
+     print("\033[1;34;48m-DIFFICULTY-")
      print("[1]EASY\n[2]NORMAL\n[3]HARD")
      difficulty = input("Please choose your difficulty:")
      print()
@@ -33,7 +33,7 @@ def difficulty_level():
        lives = 3
        image = diff_3
      else:
-       print("Please choose difficulty 1, 2 or 3")
+       print("\033[1;31;48mPlease choose difficulty 1, 2 or 3\033")
        continue
      return lives, image
 #-----------------------------------------------
@@ -43,7 +43,7 @@ def get_random_countries():
   lines = f.readlines()
   valid_input = False
   while valid_input == False:
-    chocaco = input("-WORDLISTS-\n[co]COUNTRIES\n[ca]CAPITALS\nMake your choice: ")
+    chocaco = input("\033[1;34;48m-WORDLISTS-\n[co]COUNTRIES\n[ca]CAPITALS\nMake your choice: ")
     countries = []
     capitals = []
     if chocaco == "co":
@@ -55,12 +55,12 @@ def get_random_countries():
         capitals.append(capital.split('|')[-1].strip())
       return random.choice(capitals)
     else:
-      print ("You have to choose between \"co\" and \"ca\" ")
+      print ("\033[1;31;48mYou have to choose between \"co\" and \"ca\" \033")
 #----------------------------------------------------------------
 def new_game(runtime):
   loop = True
   while loop == True:
-    yn = input("Do you want to play again?(y/n)")
+    yn = input("\033[1;34;48mDo you want to play again?(y/n)")
     if yn == "y":
       print("-NEW GAME-")
       loop = False
@@ -104,40 +104,41 @@ while runtime == True:
     Screen(guessed_right, image, lives, word_to_guess)
     print(f"Lives: {lives}") 
     if godmode == True: # print the solution if godmode is on
-      print(f"Solution: {word_to_guess}")
-    guess = input("Guess a letter\n(Type \"QUIT\" to quit the Game)").upper() # get input as upper (guess)
+      print(f"\033[1;31;48mSolution: {word_to_guess}")
+    guess = input("\033[1;34;48mGuess a letter\n(Type \"QUIT\" to quit the Game)").upper() # get input as upper (guess)
     if len(guess) > 1:
       if guess == "QUIT":
+        print("BACKGROUNDMUSIC: The Hanging Tree [Lorenzotanyl] [Progressive Psy Remix]")
         print("bye")
         valid_guess = True
         runtime = False
       elif guess == "GODMODE": # enables godmode/ cheatmode
         godmode = True
       else:
-        print("Please just one letter!") #below has just one letter
+        print("\033[1;31;48mPlease just one letter!\033") #below has just one letter
     else:
       if guess.isalpha() == True:
         if find(guess, already_tried_letters) == True:
-          print("-" * 23, f"\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
+          print("-" * 23, f"\n\033[1;31;48mYou've allready tried this letter!\n\033[1;33;48mAlready tried letters: {already_tried_letters}\033")
         else:
           already_tried_letters.append(guess)
           if find(guess, word_as_letters) == True: # shows if input is in the word.
-            print("-" * 23, "\nhurray")
+            print("-" * 23, "\n\033[1;32;48mhurray\033")
             guessed_right.append(guess) #adds guess to guessed_right
             win_count = win_count + 1 * word_as_letters.count(guess) #counts correct letters
             if len(word_as_letters) == win_count:
               Screen(guessed_right, image, lives, word_to_guess)
-              print("!!!YOU WON!!!")
+              print("\033[1;32;48m!!!YOU WON!!!\033")
               valid_guess = True
               runtime = new_game(runtime)
           else:
-            print("-" * 23, "\nbooooo")
+            print("-" * 23, "\n\033[1;31;48mbooooo\033")
             lives = lives - 1
             if lives == 0:
               Screen(guessed_right, image, lives, word_to_guess)
-              print(f"-GAME OVER-\nThe correct word is {word_to_guess}.")
+              print(f"\033[1;31;48m-GAME OVER-\nThe correct word is {word_to_guess}.\033")
               valid_guess = True
               runtime = new_game(runtime)
       else:
-        print("Please try a letter!")
+        print("\033[1;31;48mPlease try a letter!\033")
 
