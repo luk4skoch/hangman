@@ -21,7 +21,7 @@ def difficulty_level():
   lives = 0
   while True:
      print("\033[1;34;48m-DIFFICULTY-")
-     print("[1]EASY\n[2]NORMAL\n[3]HARD")
+     print("\033[1;32;48m[1]EASY\n\033[1;33;48m[2]NORMAL\n\033[1;31;48m[3]HARD\033")
      difficulty = input("Please choose your difficulty:")
      print()
      if difficulty == "1":
@@ -44,7 +44,7 @@ def get_random_countries():
   lines = f.readlines()
   valid_input = False
   while valid_input == False:
-    chocaco = input("\033[1;34;48m-WORDLISTS-\n[co]COUNTRIES\n[ca]CAPITALS\nMake your choice: ")
+    chocaco = input("\033[1;34;48m-WORDLISTS-\n\033[1;36;48m[co]COUNTRIES\n[ca]CAPITALS\n\033[1;34;48mMake your choice: ")
     countries = []
     capitals = []
     if chocaco == "co":
@@ -102,7 +102,12 @@ while runtime == True:
   valid_guess = False
   while valid_guess == False: 
     Screen(guessed_right, image, lives, word_to_guess)
-    print(f"Lives: {lives}") 
+    if lives < 4:
+      print(f"\033[1;31;48mLives: {lives}\033") 
+    elif lives > 5:
+      print(f"\033[1;32;48mLives: {lives}\033")
+    else:
+      print(f"\033[1;33;48mLives: {lives}\033")
     if godmode == True: # print the solution if godmode is on
       print(f"\033[1;31;48mSolution: {word_to_guess}")
     guess = input("\033[1;34;48mGuess a letter\n(Type \"QUIT\" to quit the Game)").upper() # get input as upper (guess)
