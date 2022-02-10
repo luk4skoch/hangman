@@ -20,8 +20,9 @@ def difficulty_level():
   image.clear()
   lives = 0
   while True:
-     print("\033[1;34;48m-DIFFICULTY-")
-     print("\033[1;32;48m[1]EASY\n\033[1;33;48m[2]NORMAL\n\033[1;31;48m[3]HARD\033")
+     #print("\033[1;34;48m-HANGINGTREE-\033")
+     #print("\033[1;34;48m-DIFFICULTY-\033")
+     #print("\033[1;32;48m[1]EASY\n\033[1;33;48m[2]NORMAL\n\033[1;31;48m[3]HARD\033")
      difficulty = input("Please choose your difficulty:")
      print()
      if difficulty == "1":
@@ -83,6 +84,8 @@ guessed_right = []
 already_tried_letters = []
 word_as_letters = []
 playsound("background_music.mp3", False)
+#-----------------------------------------------Title------------------
+print(open("tree.txt").read())
 #-----------------------------------------------gameloop:--------------------------------------------
 while runtime == True:
   # clear variables:
@@ -145,4 +148,3 @@ while runtime == True:
               runtime = new_game(runtime)
       else:
         print("\033[1;31;48mPlease try a letter!\033")
-
