@@ -20,6 +20,7 @@ def difficulty_level():
      print("-DIFFICULTY-")
      print("[1]EASY\n[2]NORMAL\n[3]HARD")
      difficulty = input("Please choose your difficulty:")
+     print()
      if difficulty == "1":
        lives = 7
        image = diff_1
@@ -80,6 +81,7 @@ word_as_letters = []
 #-----------------------------------------------gameloop:--------------------------------------------
 while runtime == True:
   # clear variables:
+  godmode = False
   win_count = 0
   word_as_letters.clear()
   guessed_right.clear()
@@ -96,13 +98,16 @@ while runtime == True:
   while valid_guess == False: 
     Screen(guessed_right, image, lives, word_to_guess)
     print(f"Lives: {lives}") 
-    print(word_to_guess)
+    if godmode == True: # print the solution if godmode is on
+      print(f"Solution: {word_to_guess}")
     guess = input("Guess a letter\n(Type \"QUIT\" to quit the Game)").upper() # get input as upper (guess)
     if len(guess) > 1:
       if guess == "QUIT":
         print("bye")
         valid_guess = True
         runtime = False
+      elif guess == "GODMODE": # enables godmode/ cheatmode
+        godmode = True
       else:
         print("Please just one letter!") #below has just one letter
     else:
