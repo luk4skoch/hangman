@@ -68,7 +68,8 @@ def new_game(runtime):
     else:
       print("please write y or n!")
   return runtime
-#MAIN-----------------------------------------------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+#-------------------------------------------MAIN-------------------------------------------------------------------------------
 #Variables:
 import random
 from hangman_ASCII_art import *
@@ -76,7 +77,7 @@ runtime = True
 guessed_right = []
 already_tried_letters = []
 word_as_letters = []
-#gameloop:--------------------------------------------
+#-----------------------------------------------gameloop:--------------------------------------------
 while runtime == True:
   # clear variables:
   win_count = 0
@@ -105,24 +106,28 @@ while runtime == True:
       else:
         print("Please just one letter!") #below has just one letter
     else:
-      if find(guess, already_tried_letters) == True:
-        print(f"-" * 23, "\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
-      else:
-        already_tried_letters.append(guess)
-        if find(guess, word_as_letters) == True: # shows if input is in the word.
-          print("-" * 23, "\nhurray")
-          guessed_right.append(guess) #adds guess to guessed_right
-          win_count = win_count + 1 * word_as_letters.count(guess) #counts correct letters
-          if len(word_as_letters) == win_count:
-            Screen(guessed_right, image, lives, word_to_guess)
-            print("!!!YOU WON!!!")
-            valid_guess = True
-            runtime = new_game(runtime)
+      if guess.isalpha() == True:
+        if find(guess, already_tried_letters) == True:
+          print("-" * 23, f"\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
         else:
-          print("-" * 23, "\nbooooo")
-          lives = lives - 1
-          if lives == 0:
-            Screen(guessed_right, image, lives, word_to_guess)
-            print(f"-GAME OVER-\nThe correct word is {word_to_guess}.")
-            valid_guess = True
-            runtime = new_game(runtime)
+          already_tried_letters.append(guess)
+          if find(guess, word_as_letters) == True: # shows if input is in the word.
+            print("-" * 23, "\nhurray")
+            guessed_right.append(guess) #adds guess to guessed_right
+            win_count = win_count + 1 * word_as_letters.count(guess) #counts correct letters
+            if len(word_as_letters) == win_count:
+              Screen(guessed_right, image, lives, word_to_guess)
+              print("!!!YOU WON!!!")
+              valid_guess = True
+              runtime = new_game(runtime)
+          else:
+            print("-" * 23, "\nbooooo")
+            lives = lives - 1
+            if lives == 0:
+              Screen(guessed_right, image, lives, word_to_guess)
+              print(f"-GAME OVER-\nThe correct word is {word_to_guess}.")
+              valid_guess = True
+              runtime = new_game(runtime)
+      else:
+        print("Please try a letter!")
+
