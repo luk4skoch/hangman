@@ -48,7 +48,7 @@ def get_random_countries():
   lines = f.readlines()
   valid_input = False
   while valid_input == False:
-    chocaco = input("Make your choice: ")
+    chocaco = input("-WORDLISTS-\n[co]COUNTRIES\n[ca]CAPITALS\nMake your choice: ")
     countries = []
     capitals = []
     if chocaco == "co":
@@ -79,18 +79,21 @@ def new_game(runtime):
   return runtime
   
 #MAIN-----------------------------------------------------------------------------------------------------------------------------------------
+#Variables:
 runtime = True
 guessed_right = []
 already_tried_letters = []
 word_as_letters = []
+#gameloop:
 while runtime == True:
+  # clear variables:
   win_count = 0
   word_as_letters.clear()
   guessed_right.clear()
   already_tried_letters.clear()
-
+  # set variables:
   lives, image = difficulty_level() #set difficulty
-  word_to_guess = get_random_countries()
+  word_to_guess = get_random_countries() #set word_to_guess
   for i in range(0, len(word_to_guess)):
       word_as_letters.append(word_to_guess[i].upper())
   if " " in word_as_letters:
@@ -111,11 +114,11 @@ while runtime == True:
         print("Please just one letter!") #below has just one letter
     else:
       if find(guess, already_tried_letters) == True:
-        print(f"---------------\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
+        print(f"-" * 23, "\nYou've allready tried this letter!\nAlready tried letters: {already_tried_letters}")
       else:
         already_tried_letters.append(guess)
         if find(guess, word_as_letters) == True: # shows if input is in the word.
-          print("---------------\nhurray")
+          print("-" * 23, "\nhurray")
           guessed_right.append(guess) #adds guess to guessed_right
           win_count = win_count + 1 * word_as_letters.count(guess) #counts correct letters
           if len(word_as_letters) == win_count:
@@ -124,7 +127,7 @@ while runtime == True:
             valid_guess = True
             runtime = new_game(runtime)
         else:
-          print("---------------\nbooooo")
+          print("-" * 23, "\nbooooo")
           lives = lives - 1
           if lives == 0:
             Screen(guessed_right, image, lives, word_to_guess)
